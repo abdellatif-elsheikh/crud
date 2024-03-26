@@ -32,51 +32,63 @@
         <form>
 
           <div class="mb-3">
-            <label for="select-category" class="form-label">Chose Category *</label>
-            <select class="form-select" id="select-category" aria-label="Default select example">
+            <label for="category" class="form-label">Chose Category *</label>
+            <select class="form-select" id="category" aria-label="Default select example">
               <option selected disabled>Chose Product Category</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="smartphones">smartphones</option>
+              <option value="laptops">laptops</option>
+              <option value="fragrances">fragrances</option>
+              <option value="skincare">skincare</option>
+              <option value="groceries">groceries</option>
+              <option value="home-decoration">home-decoration</option>
             </select>
           </div>
 
           <div class="mb-3">
-            <label for="select-brand" class="form-label">Chose Brand *</label>
-            <select class="form-select" id="select-brand" aria-label="Default select example">
+            <label for="brand" class="form-label">Chose Brand *</label>
+            <select class="form-select" id="brand" aria-label="Default select example">
               <option selected disabled>Chose Product Brand</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="Apple">Apple</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Huawei">Huawei</option>
+              <option value="OPPO">OPPO</option>
+              <option value="Infinix">Infinix</option>
+              <option value="Microsoft">Microsoft</option>
+              <option value="other">other</option>
             </select>
           </div>
 
           <div class="mb-3">
-            <label for="form-name" class="form-label">Model Name *</label>
-            <input type="text" class="form-control" id="form-name" aria-describedby="emailHelp">
+            <label for="name" class="form-label">Model Name *</label>
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="form-price" class="form-label">Price *</label>
-            <input type="number" class="form-control" id="form-price" aria-describedby="emailHelp">
+            <label for="price" class="form-label">Price *</label>
+            <input type="number" class="form-control" id="price" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
-            <label for="form-desc" class="form-label">Description *</label>
-            <input type="password" class="form-control" id="form-desc">
+            <label for="desc" class="form-label">Description *</label>
+            <input type="password" class="form-control" id="desc">
           </div>
 
           <div class="mb-3">
-            <label for="available-peaces-form" class="form-label">Available Pieces *</label>
-            <input type="number" class="form-control" id="available-peaces-form" aria-describedby="emailHelp">
+            <label for="stock" class="form-label">Stock *</label>
+            <input type="number" class="form-control" id="stock" aria-describedby="emailHelp">
+          </div>
+          
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating *</label>
+            <input type="number" class="form-control" id="rating" aria-describedby="emailHelp">
           </div>
 
           <div class="mb-3">
             <label for="upload-picture" class="form-label">Upload Picture</label>
-            <input type="file" class="form-control" id="upload-picture" aria-describedby="emailHelp">
+            <input type="file" class="form-control" id="upload-picture" aria-describedby="emailHelp" disabled>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary submit">Submit</button>
         </form>
       </div>
     </div>
