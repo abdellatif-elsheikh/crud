@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <title>CRUD</title>
+</head>
+
+<body>
+
+  <header>
+    <div class="container-fluid p-5">
+      <main class="content d-flex flex-column justify-content-center align-items-center">
+        <h1 class="p-5">CRUD Operations</h1>
+        <p class="lead muted">This a demo project on CRUD operations but you can use it as a system for your clinic,
+          shop, store and etc...</p>
+      </main>
+    </div>
+  </header>
+
+
+  <section class="fields-container ">
+    <div class="container-fluid p-5">
+
+      <div class="form-container">
+        <form>
+
+          <div class="mb-3">
+            <label for="select-category" class="form-label">Chose Category *</label>
+            <select class="form-select" id="select-category" aria-label="Default select example">
+              <option selected disabled>Chose Product Category</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="select-brand" class="form-label">Chose Brand *</label>
+            <select class="form-select" id="select-brand" aria-label="Default select example">
+              <option selected disabled>Chose Product Brand</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="form-name" class="form-label">Model Name *</label>
+            <input type="text" class="form-control" id="form-name" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="form-price" class="form-label">Price *</label>
+            <input type="number" class="form-control" id="form-price" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="form-desc" class="form-label">Description *</label>
+            <input type="password" class="form-control" id="form-desc">
+          </div>
+
+          <div class="mb-3">
+            <label for="available-peaces-form" class="form-label">Available Pieces *</label>
+            <input type="number" class="form-control" id="available-peaces-form" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="upload-picture" class="form-label">Upload Picture</label>
+            <input type="file" class="form-control" id="upload-picture" aria-describedby="emailHelp">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="products-display">
+    <div class="container-fluid p-5">
+      <hr>
+      <div class="row p-2">
+        <div class="col">
+          #CATEGORY
+        </div>
+        <div class="col">
+          #BRAND
+        </div>
+        <div class="col">
+          #NAME
+        </div>
+        <div class="col">
+          #PRICE
+        </div>
+        <div class="col">
+          #DESCRIPTION
+        </div>
+        <div class="col">
+          #AVAILABLE PIECES
+        </div>
+        <div class="col">
+          #EDIT
+        </div>
+        <div class="col">
+          #DELETE
+        </div>
+        <hr>
+
+      </div>
+      <div class="row p-2">
+        <div class="col">
+          Phons
+        </div>
+        <div class="col">
+          Phons
+        </div>
+        <div class="col">
+          Phons
+        </div>
+        <div class="col">
+          Phons
+        </div>
+        <div class="col">
+          Phons
+        </div>
+        <div class="col">
+          Phons
+        </div>
+        <div class="col">
+          <button class="btn btn-info">Edit</button>
+        </div>
+        <div class="col">
+          <button class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+  <!-- ********** Products Display ********* -->
+  <section class="products-display">
+    <div class="container-fluid p-5">
+      <hr>
+
+      <div class="products-table row">
+        <div class="p-3 col-xl-3 col-lg-4 col-md-6 col-12">
+          <div class="product card border-dark-subtle shadow rounded-2 overflow-hidden">
+            <div class="image">
+              <img src="https://sm.pcmag.com/pcmag_uk/photo/a/apple-ipho/apple-iphone-15-pro-max-back-view_4kkn.jpg"
+                class="w-100" alt="" id="image">
+            </div>
+            <div class="content p-2">
+              <h4 class="model-name my-3">Iphone</h4>
+              <p class="product-desc">description goes here Lorem ipsum dolor sit amet. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia veritatis facere ea accusamus quisquam enim! Repellendus suscipit, placeat nisi, in qui, beatae incidunt reiciendis vitae voluptatibus sint cupiditate! Perspiciatis, facere.</p>
+              <p>Price: 500$</p>
+
+              <div class="c-b-avp text-muted">
+                <span class="category text-primary">Phones</span>
+                <span class="Brand text-info">Iphone</span>
+                <span class="avp">( <strong>5</strong>: Peaces Left)</span>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-outline-primary display-btn">show more</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    </div>
+  </section>
+  <!-- js -->
+  <script src="main.js"></script>
+</body>
+
+</html>

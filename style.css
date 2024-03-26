@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+body {
+  font-family: "Roboto Mono", monospace;
+  background-color: #FCFAF0;
+}
+
+h1 {
+  font-family: "Anta", sans-serif;
+  font-size: 55px;
+}
+
+.product {
+  transition: transform .3s;
+  cursor: pointer;
+}
+
+.product:hover {
+  transform: scale(1.04);
+}
+
+.products-table .card .image img {
+  aspect-ratio: 8 /5;
+}
+
+/* Category Brand Available pieces */
+.c-b-avp {
+  font-size: 14px;
+}
+
+.c-b-avp > span:not(:last-child) {
+  cursor: pointer;
+}
+
+.product-desc {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
