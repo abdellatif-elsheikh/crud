@@ -35,6 +35,13 @@ h1 {
   font-size: 14px;
 }
 
+/* styling the error message */
+.error-msg {
+  font-size: 14px;
+  color: rgb(160, 0, 0);
+  font-weight: 900;
+}
+
 /* Category Brand Available pieces */
 .c-b-avp {
   font-size: 14px;
@@ -80,3 +87,4 @@ h1 {
   font-weight: 900;
   color: #f8ce0b;
 }
+

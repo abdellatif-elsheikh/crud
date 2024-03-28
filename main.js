@@ -1,8 +1,8 @@
-let allProductsContainer =  []
+let allProductsContainer = []
 
 
 // prevent form from being submitted
-document.querySelector('form').addEventListener('submit', (e) =>{
+document.querySelector('form').addEventListener('submit', (e) => {
   e.preventDefault()
 })
 
@@ -29,11 +29,11 @@ const starRating = async () => {
   try {
     const data = await allProductsContainer
 
-    const starIcons =  document.querySelectorAll('.stars-inner')
+    const starIcons = document.querySelectorAll('.stars-inner')
 
     starIcons.forEach((icon, index) => {
       const rating = data[index].rating
-      const starPercentage = Number(( rating / 5) * 100 )
+      const starPercentage = Number((rating / 5) * 100)
       icon.style.width = starPercentage + '%';
     })
   } catch {
@@ -73,7 +73,7 @@ const createProductCard = (product) => {
 
   </div>
 </div>`
-return template
+  return template
 }
 
 // let productElements = ``
@@ -107,7 +107,7 @@ const storeData = (category, brand, title, price, description, stock, rating, im
   return takenData
 }
 
-const validateProduct = ({...productData}) => {
+const validateProduct = ({ ...productData }) => {
   const validations = {
     category: /^(smartphones|laptops|fragrances|skincare|groceries|home-decoration)$/,
     brand: /^(Apple|Samsung|Huawei|OPPO|Infinix|Microsoft|other)$/,
@@ -120,22 +120,38 @@ const validateProduct = ({...productData}) => {
   };
   const results = {};
   const errors = {}
-  
-  for(const field in validations) {
+
+  for (const field in validations) {
     const value = document.getElementById(field).value
     const isValid = validations[field].test(value)
-    console.log(field, value, isValid);
     results[field] = isValid
 
 
-    if(!isValid) {
+    if (!isValid) {
       errors[field] = `invalid ${field}`
-      // console.log('error', results);
-      return errors
     }
+  }
+  if (errors) {
+    return errors
   }
   console.log('all valid', results);
   return true
+}
+
+// show validation errors
+const displayValidationErrs = ({ ...errors }) => {
+  for (error in errors) {
+    const parent = document.getElementById(error).parentElement
+    const child = document.createElement('span')
+    child.setAttribute('class', 'error-msg')
+    // console.log(parent);
+    const isThereError = parent.children[1].tagName === 'SPAN'
+    if (isThereError) {
+      return
+    }
+    parent.insertBefore(child, parent.childNodes[2])
+    child.textContent = ` ${errors[error]}`
+  }
 }
 
 // Collect the data from the user
@@ -150,15 +166,17 @@ const collectData = () => {
   const rating = d.getElementById('rating').value
   const images = []
   const newProd = storeData(cat, brand, title, price, desc, stock, rating, images)
-  
+
   const isValid = validateProduct(newProd)
-  console.log(isValid);
-  if(isValid === true) {
+
+
+
+  if (isValid === true) {
     allProductsContainer.unshift(newProd)
     renderThePage()
   }
   else {
-    console.log('un valid data', isValid);
+    displayValidationErrs(isValid)
   }
   return newProd
 }
