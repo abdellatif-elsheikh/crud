@@ -107,25 +107,68 @@ const storeData = (category, brand, title, price, description, stock, rating, im
   return takenData
 }
 
+const validateProduct = ({...productData}) => {
+  const validations = {
+    category: /^(smartphones|laptops|fragrances|skincare|groceries|home-decoration)$/,
+    brand: /^(Apple|Samsung|Huawei|OPPO|Infinix|Microsoft|other)$/,
+    title: /^[\w\s-]{4,30}$/,
+    price: /^(?:[1-9]\d{0,4}|100000)$/,
+    desc: /^.{30,700}$/,
+    stock: /^([1-9]\d{0,2}|1000)$/,
+    rating: /^[1-4]|5$/,
+    // imageUrl: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?.(jpg|jpeg|png|gif|bmp|svg)$/
+  };
+  const results = {};
+  const errors = {}
+  
+  for(const field in validations) {
+    const value = document.getElementById(field).value
+    const isValid = validations[field].test(value)
+    console.log(field, value, isValid);
+    results[field] = isValid
+
+
+    if(!isValid) {
+      errors[field] = `invalid ${field}`
+      // console.log('error', results);
+      return errors
+    }
+  }
+  console.log('all valid', results);
+  return true
+}
+
 // Collect the data from the user
 const collectData = () => {
   const d = document
   const cat = d.getElementById('category').value
   const brand = d.getElementById('brand').value
-  const title = d.getElementById('name').value
+  const title = d.getElementById('title').value
   const price = d.getElementById('price').value
   const desc = d.getElementById('desc').value
   const stock = d.getElementById('stock').value
   const rating = d.getElementById('rating').value
   const images = []
   const newProd = storeData(cat, brand, title, price, desc, stock, rating, images)
-  allProductsContainer.unshift(newProd)
-  renderThePage()
+  
+  const isValid = validateProduct(newProd)
+  console.log(isValid);
+  if(isValid === true) {
+    allProductsContainer.unshift(newProd)
+    renderThePage()
+  }
+  else {
+    console.log('un valid data', isValid);
+  }
+  return newProd
 }
 
 // take the action button
 const submit = document.querySelector('.submit')
 submit.addEventListener('click', collectData)
+
+
+
 
 // !!!!!!!!!!!!!!!!! this function must be always the last don't move it to up !!!!!!!!!!!!!!
 
@@ -134,3 +177,4 @@ const renderThePage = async () => {
   DisplayProducts()
 }
 renderThePage()
+// ***********************************************************
