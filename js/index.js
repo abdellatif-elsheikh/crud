@@ -1,3 +1,5 @@
+import { validateImage } from "image-validator";
+
 let allProductsContainer = []
 
 
@@ -107,16 +109,22 @@ const storeData = (category, brand, title, price, description, stock, rating, im
   return takenData
 }
 
-const validateProduct = () => {
+// image validation 
+
+const imageValidation = async (file) => {
+  const isValidImage = await validateImage(file);
+  return isValidImage
+};
+
+const validateProduct = async () => {
   const validations = {
     category: /^(smartphones|laptops|fragrances|skincare|groceries|home-decoration)$/,
     brand: /^(Apple|Samsung|Huawei|OPPO|Infinix|Microsoft|other)$/,
     title: /^[\w\s-]{4,30}$/,
-    price: /^(?:[1-9]\d{0,4}|100000)$/,
+    price: /^(?:[1-9]\d{0,5}|100000)$/,
     desc: /^.{30,700}$/,
-    stock: /^[1-4]|5$/,
+    stock: /^(?:[1-9]\d{0,3}|1000)$/,
     rating: /^[1-4]|5$/,
-    // imageUrl: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?.(jpg|jpeg|png|gif|bmp|svg)$/
   };
   const results = {};
   const errors = {}
@@ -126,21 +134,23 @@ const validateProduct = () => {
     const isValid = validations[field].test(value)
     results[field] = isValid
 
-
     if (!isValid) {
       errors[field] = `invalid ${field}`
     }
   }
+  const imageSrc = document.getElementById('imageUrl').value
+  const isValidImage = await imageValidation(imageSrc)
+
   const isEmpty = Object.keys(errors).length === 0
-  if (!isEmpty) {
-    return errors
+  if (isEmpty && isValidImage) {
+    return true
   }
-  return true
+  if (!isValidImage) errors['imageUrl'] = 'invalid image'
+  return errors
 }
 
 // display validation errors
 const displayValidationErrs = ({ ...errors }) => {
-  console.log(errors);
   for (let error in errors) {
     const parent = document.getElementById(error).parentElement
     const child = document.createElement('span')
@@ -164,7 +174,7 @@ const deleteErrMsg = () => {
 }
 
 // Collect the data from the user
-const collectData = () => {
+const collectData = async () => {
   const d = document
   const cat = d.getElementById('category').value.trim()
   const brand = d.getElementById('brand').value.trim()
@@ -173,22 +183,23 @@ const collectData = () => {
   const desc = d.getElementById('desc').value.trim()
   const stock = d.getElementById('stock').value.trim()
   const rating = d.getElementById('rating').value.trim()
-  const images = [/*d.getElementById('imageUrl').value.trim()*/]
+  const images = [d.getElementById('imageUrl').value.trim()]
   const newProd = storeData(cat, brand, title, price, desc, stock, rating, images)
 
   const isValid = validateProduct(newProd)
 
 
 
-  if (isValid === true) {
-    console.log('success');
+  if (await isValid === true) {
+    console.log(await isValid);
     deleteErrMsg()
     allProductsContainer.unshift(newProd)
     renderThePage()
   }
   else {
+    console.log(await isValid);
     deleteErrMsg()
-    displayValidationErrs(isValid)
+    displayValidationErrs(await isValid)
   }
   return newProd
 }
