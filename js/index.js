@@ -107,21 +107,21 @@ const storeData = (category, brand, title, price, description, stock, rating, im
   return takenData
 }
 
-const validateProduct = ({ ...productData }) => {
+const validateProduct = () => {
   const validations = {
     category: /^(smartphones|laptops|fragrances|skincare|groceries|home-decoration)$/,
     brand: /^(Apple|Samsung|Huawei|OPPO|Infinix|Microsoft|other)$/,
     title: /^[\w\s-]{4,30}$/,
     price: /^(?:[1-9]\d{0,4}|100000)$/,
     desc: /^.{30,700}$/,
-    stock: /^([1-9]\d{0,2}|1000)$/,
+    stock: /^[1-4]|5$/,
     rating: /^[1-4]|5$/,
     // imageUrl: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?.(jpg|jpeg|png|gif|bmp|svg)$/
   };
   const results = {};
   const errors = {}
 
-  for (const field in validations) {
+  for (let field in validations) {
     const value = document.getElementById(field).value
     const isValid = validations[field].test(value)
     results[field] = isValid
@@ -131,20 +131,21 @@ const validateProduct = ({ ...productData }) => {
       errors[field] = `invalid ${field}`
     }
   }
-  if (errors) {
+  const isEmpty = Object.keys(errors).length === 0
+  if (!isEmpty) {
     return errors
   }
-  console.log('all valid', results);
   return true
 }
 
-// show validation errors
+// display validation errors
 const displayValidationErrs = ({ ...errors }) => {
-  for (error in errors) {
+  console.log(errors);
+  for (let error in errors) {
     const parent = document.getElementById(error).parentElement
     const child = document.createElement('span')
     child.setAttribute('class', 'error-msg')
-    // console.log(parent);
+
     const isThereError = parent.children[1].tagName === 'SPAN'
     if (isThereError) {
       return
@@ -154,17 +155,25 @@ const displayValidationErrs = ({ ...errors }) => {
   }
 }
 
+// ! clear all error messages after every submit so it doesn't stick on the page
+const deleteErrMsg = () => {
+  const errMsgs = document.querySelectorAll('.error-msg')
+  errMsgs.forEach(msg => {
+    msg.remove()
+  })
+}
+
 // Collect the data from the user
 const collectData = () => {
   const d = document
-  const cat = d.getElementById('category').value
-  const brand = d.getElementById('brand').value
-  const title = d.getElementById('title').value
-  const price = d.getElementById('price').value
-  const desc = d.getElementById('desc').value
-  const stock = d.getElementById('stock').value
-  const rating = d.getElementById('rating').value
-  const images = []
+  const cat = d.getElementById('category').value.trim()
+  const brand = d.getElementById('brand').value.trim()
+  const title = d.getElementById('title').value.trim()
+  const price = d.getElementById('price').value.trim()
+  const desc = d.getElementById('desc').value.trim()
+  const stock = d.getElementById('stock').value.trim()
+  const rating = d.getElementById('rating').value.trim()
+  const images = [/*d.getElementById('imageUrl').value.trim()*/]
   const newProd = storeData(cat, brand, title, price, desc, stock, rating, images)
 
   const isValid = validateProduct(newProd)
@@ -172,10 +181,13 @@ const collectData = () => {
 
 
   if (isValid === true) {
+    console.log('success');
+    deleteErrMsg()
     allProductsContainer.unshift(newProd)
     renderThePage()
   }
   else {
+    deleteErrMsg()
     displayValidationErrs(isValid)
   }
   return newProd
