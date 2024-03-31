@@ -3,7 +3,7 @@ export default class CreateProduct {
     const template = `<div class="p-3 col-xl-3 col-lg-4 col-md-6 col-12">
     <div class="product card pb-3 border-dark-subtle shadow rounded-2 overflow-hidden">
       <div class="image">
-        <img src="${product.images[0] ? product.images[0] : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulVpB9YDxnnJBgPdrm5Rc5x6xmJH0xO1FYihUJpEiDSvHEOgSBSHnADEC-NLfeIQ-vos&usqp=CAU'}"
+        <img src="${product.images[0] ? product.images[0] : './assets/images.png'}"
           class="w-100" alt="" id="image">
       </div>
       <div class="content p-2">
@@ -30,6 +30,6 @@ export default class CreateProduct {
   
     </div>
   </div>`
-    return template
+  return template
   }
 }

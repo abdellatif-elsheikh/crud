@@ -1,13 +1,14 @@
 import Global from "./modules/Global.module";
 import HandelData from "./modules/HandelData.module";
 import DisplayProducts from "./modules/DisplayProduct.module";
-
+import Dashboard from "./modules/Dashboard";
 
 
 // *--------- **** INSTANCES **** ----------*
 const global = new Global
 const handelData = new HandelData
 const displayProducts = new DisplayProducts
+const dashboard = new Dashboard
 
 
 global.preventFormAction()
@@ -17,10 +18,20 @@ const submit = document.querySelector('.submit')
 submit.addEventListener('click', handelData.collectData)
 
 
-// !!!!!!!!!!!!!!!!! this function must be always the last don't move it to up !!!!!!!!!!!!!!
 
-const renderThePage = () => {
-  displayProducts.displayProducts(global.productsArray)
-}
-renderThePage()
-// ***********************************************************
+
+displayProducts.displayProducts(global.productsArray)
+
+// ************************DASHBOARD***********************************
+// display dashboard
+const displayButtons = document.querySelectorAll('.display-btn')
+displayButtons.forEach(ele => {
+  ele.addEventListener('click', dashboard.showDashboard)
+})
+// close dashboard
+const closeIcon = document.querySelector('.close-icon')
+closeIcon.addEventListener('click', dashboard.closeDashboard)
+
+dashboard.addEventsForDashboardButtons()
+
+// ***************************************************************

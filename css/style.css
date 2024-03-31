@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
+
 body {
   font-family: "Roboto Mono", monospace;
   background-color: #FCFAF0;
@@ -88,3 +89,45 @@ h1 {
   color: #f8ce0b;
 }
 
+/* start dashboard */
+.dashboard {
+  top: -100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+  transition: top .3s;
+}
+
+.show-dashboard {
+  top: 0;
+}
+
+.dashboard img {
+  aspect-ratio: 16 / 9;
+  max-width: 690px;
+}
+
+.dashboard .infos {
+  gap: 20px;
+}
+
+.dashboard .infos p:not(:nth-of-type(3)) span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.dashboard .description {
+  max-width: 780px;
+  margin: auto
+}
+
+.close-icon {
+  cursor: pointer;
+  top: 20px;
+  right: 40px;
+}
+
+.close-icon i {
+  font-size: 55px;
+}

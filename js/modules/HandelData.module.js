@@ -40,16 +40,13 @@ export default class HandelData {
 
 
 
-    if (await isValid === true) {
-      console.log(await isValid);
+    // if (await isValid === true) {
       handelValidations.deleteErrMsg()
       global.productsArray.unshift(newProd)
-      console.log(global.productsArray);
       displayProducts.displayProducts(global.productsArray)
       return
-    }
+    // }
 
-    console.log(await isValid);
     handelValidations.deleteErrMsg()
     handelValidations.displayValidationErrs(await isValid)
     return false
